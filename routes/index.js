@@ -1,4 +1,4 @@
 module.exports = async (req, res) => {
   const basePath = req.proxyUrl || req.baseUrl
-  res.render('index', { basePath })
+  res.render('index', { basePath, userInfo: req.userContext.userinfo })
 }
