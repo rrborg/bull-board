@@ -1,18 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <title>Bull Dashboard</title>
-  </head>
-  <body>
-    <div id="root">Loading...</div>
-    <script>
-      window.basePath = '<%= basePath %>'
-    </script>
-    <script src="<%= basePath %>/static/bundle.js"></script>
-  </body>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  <link href="/stylesheets/style.css" rel="stylesheet" />
+
+  <title>ProCom Job Queue Dashboard</title>
+</head>
+
+<body>
+
+  <nav class="navbar is-dark" role="navigation" aria-label="main navigation" style="z-index: 200; height: 52px;">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <img src="/images/logo.png">
+      </a>
+
+    </div>
+
+    <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item" href="/">
+          Home
+        </a>
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Tools
+          </a>
+
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="/queues">
+              Job Queues
+            </a>
+
+            <a class="navbar-item" href="/validation">
+              Validation
+            </a>
+          </div>
+        </div>
+
+        <a class="navbar-item" href="https://app.gitbook.com/@procomconsulting/spaces">
+          Wiki
+        </a>
+
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Other
+          </a>
+
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://procomconsulting.atlassian.net/wiki/discover/all-updates">
+              Confluence
+            </a>
+
+            <a class="navbar-item" href="https://github.com/VisualVault">
+              Github
+            </a>
+
+            <a class="navbar-item" href="https://procomconsulting.atlassian.net/secure/BrowseProjects.jspa">
+              Jira
+            </a>
+
+            <a class="navbar-item" href="https://procomconsulting.atlassian.net/wiki/spaces/PRP/calendars">
+              Vacation Calendar
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+
+      <% if(userInfo){ %>
+
+      <div class="navbar-end">
+        <a class="navbar-item" href="/profile">
+          Hello, <%= userInfo.name %>
+        </a>
+
+        <a class="navbar-item">
+          <form method="post" action="/logout" id="siteLogout">
+            <button class="button is-primary is-small is-outlined" id="logout-button" type="button"
+              onclick="logoutConfirm()">Logout</button>
+          </form>
+        </a>
+      </div>
+      <% }; %>
+    </div>
+  </nav>
+
+  <script>
+    // Open dialog box to confirm logging out from website.
+    function logoutConfirm() {
+      let dialog = confirm("Logout from website?");
+      if (dialog) {
+        document.getElementById("siteLogout").submit();
+      }
+    }
+  </script>
+
+  <div id="root">Loading...</div>
+  <script>
+    window.basePath = '<%= basePath %>'
+  </script>
+  <script src="<%= basePath %>/static/bundle.js"></script>
+
+  <script>
+    window.onload = function () {
+      document.getElementById('header').style.visibility = 'hidden';
+    };
+  </script>
+</body>
+
 </html>
